@@ -13,6 +13,7 @@ SYUKUR_WORKSPACE=~/syukurworkspace
 SYUKUR_ALIAS=~/.syukur/.bash_aliases
 SYUKUR_BASHRC=~/.syukur/.bashrc
 SYUKUR_PS1=~/.syukur/.ps1
+SYUKUR_FUNCTIONS=~/.syukur/.functions
 
 # ##
 # Functions
@@ -25,6 +26,15 @@ create_folder() {
   fi
 }
 
+ # Description:
+ # Create alias. If alias not exist, will create new one
+ #
+ # Parameters:
+ # $1 - alias name
+ # $2 - command to run
+ #
+ # Example:
+ #   add_alias ll "ls -l"
 add_alias() {
   # ##
   # Create aliases
@@ -72,6 +82,10 @@ add_alias dc "docker-compose"
 cp ./myps1.sh $SYUKUR_PS1
 
 # ##
+# Copy Syukur functions to ~/.syukur
+cp ./myfunction.sh $SYUKUR_FUNCTIONS
+
+# ##
 # Add syukurworkspace bin to .bashrc
 
 if [ ! -e $SYUKUR_BASHRC ]; then
@@ -87,6 +101,7 @@ cat >$SYUKUR_BASHRC <<EOL
 export PATH=\${PATH}:$SYUKUR_WORKSPACE/bin
 . $SYUKUR_ALIAS
 . $SYUKUR_PS1
+. $SYUKUR_FUNCTIONS
 EOL
 
 # ##
