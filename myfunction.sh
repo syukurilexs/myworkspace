@@ -21,7 +21,11 @@ function killport() {
 		return 1
 	fi
 
+	# Display process id for this port
+	echo -n "pid for port $1: "
+	lsof -i:$1 | grep $1 | awk '{print $2}'
+
 	# Kill port
 	echo "kill port $1"
-	lsof -i:$1 | awk '{print $2}' | xargs kill
+	lsof -i:$1 | grep $1 | awk '{print $2}' | xargs kill
 }
